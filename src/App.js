@@ -4,6 +4,10 @@ import AddCategory from "./components/AddCategory";
 import connection from "./api/connection";
 import ItemDisplay from "./components/ItemDisplay";
 import AddItem from "./components/AddItem";
+import CategoryId from "./components/Category_id";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import EditCategory from "./components/EditCategory";
+
 
 function App() {
     const [categories, setCategories] = useState([]);
@@ -71,17 +75,45 @@ function App() {
         getItems()
     },[])
 
+    //3 
+    const [list, setList] = useState([]);
+
+    const getItemsByCategory_Id = async(category_Id) => {
+        try {
+            const response = await connection.get(`/categories/${category_Id}/items`)
+            setList(response.data)
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    //4 
+
+      const editCategory = async(id, categoryName) => {
+        try {
+            const response = await connection.put(`/categories/${id}`, {id: id, name: categoryName})
+            console.log(response.data)
+            getCategories()
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+
     return(
-        <div className="App">
-            <h1>Category List</h1>
-            <AddCategory handleAddCategory={createCategory}/>
-            <CategoryDisplay categories={categories} handleDeleteCategory={deleteCategory}></CategoryDisplay>
-            <h1> Item List </h1>
-            <AddItem handleAddName={createItem} handleAddPrice={createItem} handleAddCategory_id={createItem}
-            handleAddDescription={createItem}/> 
-            <ItemDisplay items={items}> </ItemDisplay>
-        </div>
-    )
-};
+        <BrowserRouter>
+      <Routes>
+        <>
+        <Route path="/1" element={<AddCategory handleAddCategory={createCategory}/>}/>
+        <Route path="/2" element={<CategoryDisplay categories={categories} handleDeleteCategory={deleteCategory}></CategoryDisplay>}/>
+         <Route path="/3" element={<AddItem handleAddItem={createItem}/>} />
+         <Route path="/" element={<ItemDisplay items={items}> </ItemDisplay> }/>
+         <Route path="/categories/:id/items" element={<CategoryId list={list} handleSubmitItems={getItemsByCategory_Id}/>} />
+         <Route path="/categories/:id" element={<EditCategory categories={categories} handleEditCategory={editCategory }/>} />
+       </>
+      </Routes>
+        </BrowserRouter>
+    );
+}
 export default App;
 

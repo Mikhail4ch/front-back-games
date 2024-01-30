@@ -1,4 +1,7 @@
-const ItemDisplay = ({items}) => {
+import { NavLink } from "react-router-dom";
+import styles from "./View.module.css"
+
+const ItemDisplay = ({ items}) => {
 
     return (
         <div>
@@ -10,13 +13,20 @@ const ItemDisplay = ({items}) => {
                     <td>Description</td>
                     <td>Category_id</td>
                 </th>
-                {items && 
+                {items &&
                     items.map((item) => {
-                        return<tr key={item.id}>
+                        return <tr key={item.id}>
                             <td>{item.name}</td>
                             <td>{item.price}</td>
                             <td>{item.description}</td>
-                            <td>{item.category_id}</td>
+                             <NavLink className={({ isActive }) =>
+                                isActive ? styles.linkActive : styles.link
+                            }
+                                to={`/categories/${item.category_id}/items`}
+                                key={item.category_id}
+                            ><td> {item.category_id}</td>
+                            </NavLink>
+                                
                         </tr>
                     })
                 }

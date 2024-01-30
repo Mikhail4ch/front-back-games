@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const AddItem = ({ handleAddName, handleAddPrice, handleAddDescription, handleAddCategory_id}) => {
+const AddItem = ({handleAddItem}) => {
     const [itemName, setItemName] = useState("");
     const [itemPrice, setItemPrice] = useState("");
     const [itemDescription, setItemDescription] = useState("");
@@ -24,10 +24,7 @@ const AddItem = ({ handleAddName, handleAddPrice, handleAddDescription, handleAd
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        handleAddName(itemName)
-        handleAddPrice(itemPrice)
-        handleAddDescription(itemDescription)
-        handleAddCategory_id(itemCategory_id)
+        handleAddItem(itemName, itemPrice, itemDescription, itemCategory_id)
     }
 
     return (
