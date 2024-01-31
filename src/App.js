@@ -109,7 +109,7 @@ function App() {
          <Route path="/3" element={<AddItem handleAddItem={createItem}/>} />
          <Route path="/" element={<ItemDisplay items={items}> </ItemDisplay> }/>
          <Route path="/categories/:id/items" element={<CategoryId list={list} handleSubmitItems={getItemsByCategory_Id}/>} />
-         <Route path="/categories/:id" element={<EditCategory categories={categories} handleEditCategory={editCategory }/>} />
+         <Route path="/categories/:id" element={<EditCategory handleEditCategory={editCategory }/>} />
        </>
       </Routes>
         </BrowserRouter>

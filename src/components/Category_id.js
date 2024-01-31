@@ -1,12 +1,12 @@
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate} from 'react-router-dom'
 
-function CategoryId({ list, handleSubmitItems }) {
+function CategoryId({ list, handleSubmitItems }) { 
     const { id } = useParams();
     handleSubmitItems(id)
-    list.find((item) => item.category_id === id)
     const navigate = useNavigate();
 
-    return (
+
+    return ( 
         <div>
             {list && list.map((item) => {
                 return (

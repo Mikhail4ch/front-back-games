@@ -20,11 +20,10 @@ const ItemDisplay = ({ items}) => {
                             <td>{item.price}</td>
                             <td>{item.description}</td>
                              <NavLink className={({ isActive }) =>
-                                isActive ? styles.linkActive : styles.link
-                            }
+                                isActive ? styles.linkActive : styles.l}
                                 to={`/categories/${item.category_id}/items`}
-                                key={item.category_id}
-                            ><td> {item.category_id}</td>
+                                key={item.category_id}>
+                                <td> {item.category_id}</td>
                             </NavLink>
                                 
                         </tr>
