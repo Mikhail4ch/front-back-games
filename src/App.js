@@ -75,18 +75,7 @@ function App() {
         getItems()
     },[])
 
-    //3 
-    const [list, setList] = useState([]);
-
-    const getItemsByCategory_Id = async(category_Id) => {
-        try {
-            const response = await connection.get(`/categories/${category_Id}/items`)
-            setList(response.data)
-        } catch (error) {
-            console.log(error.message)
-        }
-    }
-
+    
     //4 
 
       const editCategory = async(id, categoryName) => {
@@ -108,7 +97,7 @@ function App() {
         <Route path="/2" element={<CategoryDisplay categories={categories} handleDeleteCategory={deleteCategory}></CategoryDisplay>}/>
          <Route path="/3" element={<AddItem handleAddItem={createItem}/>} />
          <Route path="/" element={<ItemDisplay items={items}> </ItemDisplay> }/>
-         <Route path="/categories/:id/items" element={<CategoryId list={list} handleSubmitItems={getItemsByCategory_Id}/>} />
+         <Route path="/categories/:id/items" element={<CategoryId/>} />
          <Route path="/categories/:id" element={<EditCategory handleEditCategory={editCategory }/>} />
        </>
       </Routes>

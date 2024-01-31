@@ -1,11 +1,30 @@
-import { useParams, useNavigate} from 'react-router-dom'
+import { useParams, useNavigate} from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import connection from '../api/connection'
 
-function CategoryId({ list, handleSubmitItems }) { 
-    const { id } = useParams();
-    handleSubmitItems(id)
+function CategoryId() { 
+    
+    const {id} = useParams()??null;
     const navigate = useNavigate();
 
+    if (!id) {
+        navigate('/')
+    }
+    const [list, setList] = useState([]);
 
+const getItemsByCategory_Id = async(id) => {
+    try {
+        const response = await connection.get(`/categories/${id}/items`)
+        setList(response.data)
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+useEffect(() => {
+    getItemsByCategory_Id()
+},[])
+   
     return ( 
         <div>
             {list && list.map((item) => {
