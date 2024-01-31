@@ -22,8 +22,8 @@ const getItemsByCategory_Id = async(id) => {
 }
 
 useEffect(() => {
-    getItemsByCategory_Id()
-},[])
+    getItemsByCategory_Id(id)
+},[id])
    
     return ( 
         <div>
